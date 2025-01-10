@@ -1,0 +1,14 @@
+#Ensemble des bilbiothèqus uttilisées
+import streamlit as st
+import yfinance as yf
+import pandas as pd
+from datetime import datetime
+from io import StringIO
+import requests
+from bs4 import BeautifulSoup
+import google.generativeai as genai
+import textwrap
+from streamlit.components.v1 import html
+from markdown import Markdown            
+import os
+from dotenv import load_dotenv
