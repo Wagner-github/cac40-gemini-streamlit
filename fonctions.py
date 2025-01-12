@@ -7,6 +7,7 @@ from markdown import Markdown
 import textwrap
 import google.generativeai as genai
 
+from gemini_api import model_api
 
 links=[]
 text_to_save = []
