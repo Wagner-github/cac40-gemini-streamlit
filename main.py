@@ -6,7 +6,7 @@ from io import StringIO
 
 from data import data_tickers
 from fonctions import format_value, safe_format, scrape_page_recursive, scrape_article, generate_summary_from_text, links, text_to_save
-from gemini_api import ma_cle_secrete, #model_api
+from gemini_api import ma_cle_secrete
 
 
 # Utiliser StringIO pour convertir la chaîne en un fichier-like object
