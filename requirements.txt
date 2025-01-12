@@ -1,1 +1,8 @@
-
+streamlit
+yfinance
+pandas
+requests
+beautifulsoup4
+google-generativeai
+python-dotenv
+markdown
