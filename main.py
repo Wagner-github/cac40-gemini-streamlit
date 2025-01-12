@@ -6,7 +6,6 @@ from io import StringIO
 
 from data import data_tickers
 from fonctions import format_value, safe_format, scrape_page_recursive, scrape_article, generate_summary_from_text, links, text_to_save
-#from gemini_api import ma_cle_secrete
 
 
 # Utiliser StringIO pour convertir la chaîne en un fichier-like object
@@ -14,10 +13,6 @@ data_io = StringIO(data_tickers)
 
 # Lire les données avec Pandas
 df_chart = pd.read_csv(data_io)
-
-#variables globales
-#links = []
-#text_to_save = []
 
 st.title("Analyse financière")
 st.subheader("Vision globale")
