@@ -65,7 +65,7 @@ if button: # Vue des infos de bases
                 selected_period, interval = period_map.get(period, ("1mo", "1d"))
                 history_data = stock.history(period=selected_period, interval=interval)
 
-                chart_data = pd.DataFrame(history["Close"])
+                chart_data = pd.DataFrame(history_data["Close"])
                 st.line_chart(chart_data) # affichage du graphique
 
                 col1, col2, col3 = st.columns(3) #affichage colonnes informatives
