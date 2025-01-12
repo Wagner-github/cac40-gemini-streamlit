@@ -17,7 +17,7 @@ df_chart = pd.read_csv(data_io)
 
 #variables globales
 #links = []
-text_to_save = []
+#text_to_save = []
 
 st.title("Analyse financière")
 st.subheader("Vision globale")
