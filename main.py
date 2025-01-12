@@ -1,3 +1,8 @@
+import streamlit as st
+import yfinance as yf
+import pandas as pd
+from datetime import datetime
+from io import StringIO
 
 # Utiliser StringIO pour convertir la chaîne en un fichier-like object
 data_io = StringIO(data_tickers)
@@ -9,10 +14,7 @@ df_chart = pd.read_csv(data_io)
 links = []
 text_to_save = []
 
-
-
 st.title("Analyse financière")
-
 st.subheader("Vision globale")
 entreprise = st.selectbox("Choisissez l'entreprise :", df_chart["nom"].unique(), index=25, key="selectbox_entreprise")
 period = st.selectbox("Choisissez la période :", ("1D", "5D", "1M", "6M", "YTD", "1Y", "5Y", "MAX"), index=7, key="selectbox_period")
