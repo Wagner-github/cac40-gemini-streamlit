@@ -1,3 +1,11 @@
+import streamlit as st
+import pandas as pd
+from datetime import datetime
+from bs4 import BeautifulSoup
+import requests
+from markdown import Markdown 
+import textwrap
+import google.generativeai as genai
 
 # Formatage des valeurs à afficher
 def format_value(value):
