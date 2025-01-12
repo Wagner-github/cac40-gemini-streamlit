@@ -1,6 +1,6 @@
-load_dotenv() # On charge la clé API
+import streamlit as st
+import google.generativeai as genai
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") # On recupére la clé API dans .env
-genai.configure(api_key=GEMINI_API_KEY) # configuration de la clé API
-#gestion du modèle API
+ma_cle_secrete = st.secrets["GEMINI_API_KEY"] #récuperation de la clé API
+genai.configure(api_key=ma_cle_secrete) # configuration de la clé API
 model_api = genai.GenerativeModel('gemini-1.5-flash')
