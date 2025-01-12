@@ -7,6 +7,8 @@ from markdown import Markdown
 import textwrap
 import google.generativeai as genai
 
+
+links=[]
 # Formatage des valeurs à afficher
 def format_value(value):
     suffixes = ["", "K", "M", "Md"]
