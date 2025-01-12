@@ -4,6 +4,11 @@ import pandas as pd
 from datetime import datetime
 from io import StringIO
 
+from data import data_tickers
+from fonctions import format_value, safe_format, scrape_page_recursive, scrape_article, generate_summary_from_text
+from gemini_api import ma_cle_secrete, model_api
+
+
 # Utiliser StringIO pour convertir la chaîne en un fichier-like object
 data_io = StringIO(data_tickers)
 
