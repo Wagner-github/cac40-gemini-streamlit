@@ -9,6 +9,7 @@ import google.generativeai as genai
 
 
 links=[]
+text_to_save = []
 # Formatage des valeurs à afficher
 def format_value(value):
     suffixes = ["", "K", "M", "Md"]
