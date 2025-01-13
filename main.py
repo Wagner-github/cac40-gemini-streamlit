@@ -40,14 +40,14 @@ if button: # Vue des infos de bases
     if ticker:
         try:
             with st.spinner('Please wait...'):
-                # Recupèreration des infos de l'entreprise grace au tickers
+                # Récupération des infos de l'entreprise grâce au ticker
                 stock = yf.Ticker(ticker)
                 info = stock.info
 
                 st.subheader(f"{ticker} - {info.get('longName', 'N/A')}")
 
-                # Céation du graphiqe
-                period_map = { # choix period et interval
+                 # Création du graphique
+                period_map = { # Choix période et intervalle
                     "1D": ("1d", "1h"),
                     "5D": ("5d", "1d"),
                     "1M": ("1mo", "1d"),
@@ -56,15 +56,15 @@ if button: # Vue des infos de bases
                     "1Y": ("1y", "1mo"),
                     "5Y": ("5y", "3mo"),
                     "MAX": ("max", "1mo")
-                } # Mapping periode et interval
+                } # Mapping période et intervalle
                 selected_period, interval = period_map.get(period, ("1mo", "1d"))
                 history_data = stock.history(period=selected_period, interval=interval)
 
                 chart_data = pd.DataFrame(history_data["Close"])
                 st.line_chart(chart_data) # affichage du graphique
 
-                col1, col2, col3 = st.columns(3) #affichage colonnes informatives
-                #infos stock
+                col1, col2, col3 = st.columns(3) # Affichage du graphique
+                # Infos stock
                 stock_info = [
                     ("Stock Info", "Value"),
                     ("Country", info.get('country', 'N/A')),
@@ -78,7 +78,7 @@ if button: # Vue des infos de bases
                 df = pd.DataFrame(stock_info[1:], columns=stock_info[0]).astype(str)
                 col1.dataframe(df, width=400, hide_index=True)
 
-                # Information relatives aux prix et à leurs évolutions
+                # Informations relatives aux prix et à leurs évolutions
                 price_info = [
                     ("Price Info", "Value"),
                     ("Current Price", safe_format(info.get('currentPrice'), fmt="${:.2f}")),
@@ -92,7 +92,7 @@ if button: # Vue des infos de bases
                 df = pd.DataFrame(price_info[1:], columns=price_info[0]).astype(str)
                 col2.dataframe(df, width=400, hide_index=True)
 
-                # Metrics buisness
+                # Metrics business
                 biz_metrics = [
                     ("Business Metrics", "Value"),
                     ("EPS (FWD)", safe_format(info.get('forwardEps'))),
@@ -111,28 +111,28 @@ if button: # Vue des infos de bases
                 if not history_data2.empty:
                     # Convertir l'index en format 'YYYY-MM-DD' sans heure et fuseau horaire
                     history_data2.index = history_data2.index.date
-                    if user_date: # Vérifier si la date est saisie existe dans les données
-                        st.subheader(f"Analyse fine de la date : {user_date}") # Sous titre
+                    if user_date: # Vérifier si la date saisie existe dans les données
+                        st.subheader(f"Analyse fine de la date : {user_date}") # Sous-titre
                         try:
                             reference_date = pd.to_datetime(user_date).date()  # Convertir la date saisie en datetime.date
-                            url = "" # url est definit ici en prévisions du scraping
+                            url = "" # L’URL est définie ici en prévision du scraping
                             if reference_date in history_data2.index:
                                 selected_data = history_data2.loc[reference_date]
                                 st.write(selected_data)
                                 scrape_page_recursive(ticker, url, reference_date) # Fonction scraping des liens
-                                if links: #Check le résultat du scraping de liens
+                                if links: # Check le résultat du scraping de liens
                                     st.warning("ATTENTION  Ces données proviennent du site boursorama.com. Les informations vous sont résumées par une intelligence artificielle, rien de cela ne constitue des conseils financiers sous aucunes formes.", icon="⚠️")
-                                    scrape_article(links)# Fonction scraping des articles
-                                    if text_to_save: #Check le resultat du scraping d'articles
-                                        st.balloons() # des balons, voila.
-                                        text_to_summarize = " ".join(text_to_save) #on rassemble le text de toutes les pages
+                                    scrape_article(links) # Fonction scraping des articles
+                                    if text_to_save: # Check le resultat du scraping d'articles
+                                        text_to_summarize = " ".join(text_to_save) # On rassemble le texte de toutes les pages
                                         summarize_text_gemini = generate_summary_from_text(text_to_summarize) #Fonction de résumé par Gemini
                                         container = st.container(border=True) # Graphisme encadré
                                         container.write(summarize_text_gemini) # Affiche résumé dans l'encadré du container
-                                        nbrlink = 0 # On conte les liens trouvés
+                                        nbrlink = 0 # Compte les liens trouvés
+                                        st.balloons() # Des ballons qui signifient l’affichage du résumé 
                                         for link in links :
                                             nbrlink += 1
-                                            st.write(f"lien {nbrlink} : {link}") #Affiche le nombre de liens et es liens trouvés
+                                            st.write(f"lien {nbrlink} : {link}") #Affiche le nombre de liens et les liens trouvés
                                         st.write(f"Nombre de liens trouvés : {nbrlink}")
                                 else:
                                     st.error("La date saisie n'est pas ne contient pas d'article.")
