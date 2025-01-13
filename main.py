@@ -7,6 +7,7 @@ from io import StringIO
 from data import data_tickers
 from fonctions import format_value, safe_format, scrape_page_recursive, scrape_article, generate_summary_from_text, links, text_to_save
 
+st.link_button("🎯 Voir mon Portfolio", "https://jullienjeremy.notion.site/Bonjour-je-suis-Jeremy-Jullien-161909f0060e80f29683c272b92ca931?pvs=74")
 
 # Utiliser StringIO pour convertir la chaîne en un fichier-like object
 data_io = StringIO(data_tickers)
