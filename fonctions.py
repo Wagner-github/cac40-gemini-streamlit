@@ -26,7 +26,7 @@ def safe_format(value, fmt="{:.2f}", fallback="N/A"):
     except (ValueError, TypeError):
         return fallback
 
-# fonction scraping generale
+# Fonction de scraping générale
 def scrape_page_recursive(ticker, url, reference_date, nbr_page=1):
     global links
     ticker_without_pa = ticker[:-3]
@@ -42,13 +42,13 @@ def scrape_page_recursive(ticker, url, reference_date, nbr_page=1):
         span_tags = soup.find_all("span", class_="c-source__time")
         filtered_span_tags = [span for span in span_tags if ":" not in span.get_text(strip=True)]
 
-        nbr_fresher_date = 0  # Nombre d'articles rplus récents trouvés
+        nbr_fresher_date = 0  # Nombre d'articles plus récents trouvés
 
         # Traitement des dates
         for span in filtered_span_tags:
             raw_date = span.get_text(strip=True)
             try:
-                scraped_date = datetime.strptime(raw_date, "%d.%m.%Y").date() # convertion dans le même format de date
+                scraped_date = datetime.strptime(raw_date, "%d.%m.%Y").date() # Conversion dans le même format de date
                 if scraped_date > reference_date:
                     nbr_fresher_date += 1
                     continue
@@ -67,7 +67,7 @@ def scrape_page_recursive(ticker, url, reference_date, nbr_page=1):
         return scrape_page_recursive(ticker, url, reference_date, nbr_page + 1)
     #return
 
-# fonction scrap des liens
+# Fonction scrap des liens
 def scrape_article(links):
     global text_to_save
     for link in links:
@@ -89,12 +89,12 @@ def scrape_article(links):
         except requests.exceptions.RequestException as e :
             st.error(f"Erreur dans la requete web : {e}")
             return
-# fonction ecriture API Gemini
+# Fonction d’ecriture API Gemini
 def generate_summary_from_text(text):
     prompt= f"résume ceci de maniére claire et concis en quelques points, et donne un résumé en début du texte : {text}"
     response= model_api.generate_content(prompt)
 
-    if response.text : # S'assure que response contient un text
-       return response.text  # Retourne la reponse de Gimini
+    if response.text : # S'assure que response contient un texte
+       return response.text  # Retourne la réponse de Gimini
 
     return st.error("Pas de résumé generer.") # Sinon, message d'erreur
